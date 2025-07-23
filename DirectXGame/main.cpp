@@ -6,6 +6,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "WorldTransformEx.h"
+#include <cassert>
 
 #pragma comment(lib, "D3DCompiler.lib")
 
@@ -407,7 +408,8 @@ ID3D12Resource* CreateRenderTextureResource(ID3D12Device* device,
 
 	// 4. RenderTextureResourceの生成
 	ID3D12Resource* resource = nullptr;
-	HRESULT hr = device->CreateCommittedResource(
+	[[maybe_unused]] HRESULT hr =
+	    device->CreateCommittedResource(
 		&heapProperties, 
 		D3D12_HEAP_FLAG_NONE, 
 		&resourceDesc, 
@@ -444,7 +446,7 @@ ID3D12Resource* CreateDepthStencilTextureResource(ID3D12Device* device, int32_t 
 
 	// 3. Resourceの生成
 	ID3D12Resource* resource = nullptr;
-	HRESULT hr = device->CreateCommittedResource(
+	[[maybe_unused]] HRESULT hr = device->CreateCommittedResource(
 		&heapProperties, 
 		D3D12_HEAP_FLAG_NONE, 
 		&resourceDesc, 
